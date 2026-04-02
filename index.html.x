@@ -46,34 +46,39 @@ button {
 <script>
 function sendMessage() {
     let input = document.getElementById("messageInput");
-    let chatBox = document.getElementById("chatBox");
 
     if (input.value.trim() !== "") {
-        let userMessage = input.value.toLowerCase();
-
-        chatBox.innerHTML += "<p>👤: " + userMessage + "</p>";
-
-        let reply = "That’s interesting 💬";
-
-        if (userMessage.includes("hi") || userMessage.includes("hello")) {
-            reply = "Hey there 😍";
-        } 
-        else if (userMessage.includes("love")) {
-            reply = "Love is beautiful ❤️";
-        } 
-        else if (userMessage.includes("how are you")) {
-            reply = "I'm doing amazing, thanks for asking 💕";
-        }
-
-        setTimeout(() => {
-            chatBox.innerHTML += "<p>🤖: " + reply + "</p>";
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }, 1000);
+        db.collection("messages").add({
+            text: input.value,
+            time: Date.now()
+        });
 
         input.value = "";
-        chatBox.scrollTop = chatBox.scrollHeight;
     }
 }
+</script><script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+<script>
+const firebaseConfig = {
+  // paste your config here
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+</script><script>
+db.collection("messages")
+.orderBy("time")
+.onSnapshot(snapshot => {
+    let chatBox = document.getElementById("chatBox");
+    chatBox.innerHTML = "";
+
+    snapshot.forEach(doc => {
+        chatBox.innerHTML += "<p>👤: " + doc.data().text + "</p>";
+    });
+
+    chatBox.scrollTop = chatBox.scrollHeight;
+});
 </script>
 <script type="module">
   // Import the functions you need from the SDKs you need
