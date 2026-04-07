@@ -128,39 +128,27 @@ db.collection("messages")
     chatBox.innerHTML = "";
 
     snapshot.forEach(doc => {
-        let message = doc.data().text;
-        let user = doc.data().user;
+        let data = doc.data();
 
-        if (user === currentUser) {
-            chatBox.innerHTML += `
-            <div style="text-align: right; margin: 5px;">
-              <span style="
-                background: #ff4d88;
-                color: white;
-                padding: 10px;
-                border-radius: 15px;
-                display: inline-block;
-              ">
-                ${message}
-              </span>
-            </div>
-            `;
-        } else {
-            chatBox.innerHTML += `
-            <div style="text-align: left; margin: 5px;">
-              <strong>${user}</strong><br>
-              <span style="
-                background: #eee;
-                padding: 10px;
-                border-radius: 15px;
-                display: inline-block;
-              ">
-                ${message}
-              </span>
-            </div>
-            `;
+        if (
+            (data.user === currentUser && data.to === selectedUser) ||
+            (data.user === selectedUser && data.to === currentUser)
+        ) {
+            if (data.user === currentUser) {
+                chatBox.innerHTML += `
+                <div style="text-align:right;">
+                    <span>${data.text}</span>
+                </div>`;
+            } else {
+                chatBox.innerHTML += `
+                <div style="text-align:left;">
+                    <strong>${data.user}</strong><br>
+                    <span>${data.text}</span>
+                </div>`;
+            }
         }
-    }); 
+    });
+});
   db.collection("users")
 .onSnapshot(snapshot => {
     let onlineDiv = document.getElementById("onlineUsers");
