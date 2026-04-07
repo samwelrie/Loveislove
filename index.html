@@ -113,22 +113,47 @@ db.collection("messages")
 .orderBy("time")
 .onSnapshot(snapshot => {
     let chatBox = document.getElementById("chatBox");
+    let currentUser = localStorage.getItem("chatUser");
+
     chatBox.innerHTML = "";
 
     snapshot.forEach(doc => {
-        chatBox.innerHTML += `
-<div style="text-align: right; margin: 5px;">
-  <span style="
-    background: #ff4d88;
-    color: white;
-    padding: 10px;
-    border-radius: 15px;
-    display: inline-block;
-  ">
-    ${doc.data().text}
-  </span>
-</div>
-`;});
+        let message = doc.data().text;
+        let user = doc.data().user;
+
+        if (user === currentUser) {
+            chatBox.innerHTML += `
+            <div style="text-align: right; margin: 5px;">
+              <span style="
+                background: #ff4d88;
+                color: white;
+                padding: 10px;
+                border-radius: 15px;
+                display: inline-block;
+              ">
+                ${message}
+              </span>
+            </div>
+            `;
+        } else {
+            chatBox.innerHTML += `
+            <div style="text-align: left; margin: 5px;">
+              <strong>${user}</strong><br>
+              <span style="
+                background: #eee;
+                padding: 10px;
+                border-radius: 15px;
+                display: inline-block;
+              ">
+                ${message}
+              </span>
+            </div>
+            `;
+        }
+    });
+
+    chatBox.scrollTop = chatBox.scrollHeight;
+});
 
     chatBox.scrollTop = chatBox.scrollHeight;
 });
