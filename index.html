@@ -76,6 +76,8 @@ const db = firebase.firestore();
 // SEND MESSAGE
 function sendMessage() {
     let input = document.getElementById("messageInput");
+    alert(input.value);
+    }
 
     if (input.value.trim() !== "") {
         db.collection("messages").add({
