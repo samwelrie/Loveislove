@@ -149,6 +149,7 @@ db.collection("messages")
 
     snapshot.forEach(doc => {
         let data = doc.data();
+      if (!data.user || !data.to) return;
 
         if (
             (data.user === currentUser && data.to === selectedUser) ||
