@@ -156,18 +156,26 @@ db.collection("messages")
         ) {
             if (data.user === currentUser) {
                 chatBox.innerHTML += `
-                <div style="text-align:right;">
-                    <span>${data.text}</span>
-                </div>`;
+                <div style="text-align: right; margin: 5px;">
+                  <span style="background:#ff4d88;color:white;padding:10px;border-radius:15px;">
+                    ${data.text}
+                  </span>
+                </div>
+                `;
             } else {
                 chatBox.innerHTML += `
-                <div style="text-align:left;">
-                    <strong>${data.user}</strong><br>
-                    <span>${data.text}</span>
-                </div>`;
+                <div style="text-align: left; margin: 5px;">
+                  <strong>${data.user}</strong><br>
+                  <span style="background:#eee;padding:10px;border-radius:15px;">
+                    ${data.text}
+                  </span>
+                </div>
+                `;
             }
         }
     });
+
+    chatBox.scrollTop = chatBox.scrollHeight;
 });
   db.collection("users")
 .onSnapshot(snapshot => {
