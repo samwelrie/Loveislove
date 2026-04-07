@@ -67,7 +67,8 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
-</script><script>
+</script>
+<script>
 db.collection("messages")
 .orderBy("time")
 .onSnapshot(snapshot => {
