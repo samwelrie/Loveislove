@@ -46,17 +46,27 @@ button {
 
 <script>
 function sendMessage() {
-    alert("function running");
-} {
     let input = document.getElementById("messageInput");
+    let usernameInput = document.getElementById("username");
 
-    if (input.value.trim() !== "") {
+    let username = usernameInput.value;
+
+    if (username.trim() !== "") {
+        localStorage.setItem("chatUser", username);
+    }
+
+    username = localStorage.getItem("chatUser");
+
+    if (input.value.trim() !== "" && username) {
         db.collection("messages").add({
             text: input.value,
+            user: username,
             time: Date.now()
         });
 
         input.value = "";
+    } else {
+        alert("Enter username and message");
     }
 }
 <!-- FIREBASE -->
