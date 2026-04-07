@@ -50,29 +50,24 @@ button {
     if (savedUser) {
         document.getElementById("username").value = savedUser;
     }
-};
-function sendMessage() {
+};function sendMessage() {
     let input = document.getElementById("messageInput");
-    let usernameInput = document.getElementById("username");
+    let username = localStorage.getItem("chatUser");
 
-    let username = usernameInput.value;
-
-    if (username.trim() !== "") {
-        localStorage.setItem("chatUser", username);
+    if (!selectedUser) {
+        alert("Select a user first");
+        return;
     }
 
-    username = localStorage.getItem("chatUser");
-
-    if (input.value.trim() !== "" && username) {
+    if (input.value.trim() !== "") {
         db.collection("messages").add({
             text: input.value,
             user: username,
+            to: selectedUser,
             time: Date.now()
         });
 
         input.value = "";
-    } else {
-        alert("Enter username and message");
     }
 }
 <!-- FIREBASE -->
