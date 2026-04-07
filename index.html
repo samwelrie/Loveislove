@@ -101,7 +101,12 @@ function setUserOnline() {
     }
 }
 
-setUserOnline();
+setUserOnline();let selectedUser = null;
+
+function selectUser(user) {
+    selectedUser = user;
+    alert("Chatting with " + user);
+}
 // SEND MESSAGE
 function sendMessage() {
     let input = document.getElementById("messageInput");
@@ -160,22 +165,19 @@ db.collection("messages")
             </div>
             `;
         }
-    });db.collection("users")
+    }); 
+  db.collection("users")
 .onSnapshot(snapshot => {
     let onlineDiv = document.getElementById("onlineUsers");
     onlineDiv.innerHTML = "<h3>Online Users</h3>";
 
     snapshot.forEach(doc => {
         if (doc.data().online) {
-            onlineDiv.innerHTML += `<p>🟢 ${doc.id}</p>`;
+            onlineDiv.innerHTML += `
+            <p onclick="selectUser('${doc.id}')">🟢 ${doc.id}</p>
+            `;
         }
     });
-});
-
-    chatBox.scrollTop = chatBox.scrollHeight;
-});
-
-    chatBox.scrollTop = chatBox.scrollHeight;
 });
 </script></script>
 </body>
