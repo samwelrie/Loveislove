@@ -56,7 +56,8 @@ function sendMessage() {
         input.value = "";
     }
 }
-</script><script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+</script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
 <script>
@@ -79,29 +80,7 @@ db.collection("messages")
 
     chatBox.scrollTop = chatBox.scrollHeight;
 });
-</script>
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyDI3_YMcac5FMvr6h2fExFCOQ6AlAmpxFg",
-    authDomain: "loveislove-666.firebaseapp.com",
-    projectId: "loveislove-666",
-    storageBucket: "loveislove-666.firebasestorage.app",
-    messagingSenderId: "478205315739",
-    appId: "1:478205315739:web:4373741c69449c9b39943e",
-    measurementId: "G-1SXBT70C0B"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
 </script>
 </body>
 </html>
