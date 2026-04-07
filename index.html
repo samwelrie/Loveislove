@@ -56,6 +56,7 @@ function sendMessage() {
         input.value = "";
     }
 }
+<!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
@@ -66,14 +67,27 @@ const firebaseConfig = {
   projectId: "loveislove-666",
   storageBucket: "loveislove-666.appspot.com",
   messagingSenderId: "478205315739",
-  appId: "1:478205315739:web:54f3bfbac402787539943e",
-  measurementId: "G-GY6J4H5F4J"
+  appId: "1:478205315739:web:54f3bfbac402787539943e"
 };
-</script>
+
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
-</script>
-<script>
+
+// SEND MESSAGE
+function sendMessage() {
+    let input = document.getElementById("messageInput");
+
+    if (input.value.trim() !== "") {
+        db.collection("messages").add({
+            text: input.value,
+            time: Date.now()
+        });
+
+        input.value = "";
+    }
+}
+
+// LOAD MESSAGES
 db.collection("messages")
 .orderBy("time")
 .onSnapshot(snapshot => {
@@ -86,7 +100,6 @@ db.collection("messages")
 
     chatBox.scrollTop = chatBox.scrollHeight;
 });
-
-</script>
+</script></script>
 </body>
   </html>
