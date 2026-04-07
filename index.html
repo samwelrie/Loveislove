@@ -44,7 +44,13 @@ button {
 <input type="text" id="messageInput" placeholder="Type a message..." />
 <button onclick="sendMessage()">Send</button>
 
-<script>
+<script>window.onload = function() {
+    let savedUser = localStorage.getItem("chatUser");
+
+    if (savedUser) {
+        document.getElementById("username").value = savedUser;
+    }
+};
 function sendMessage() {
     let input = document.getElementById("messageInput");
     let usernameInput = document.getElementById("username");
