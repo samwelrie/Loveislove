@@ -62,7 +62,27 @@ function sendMessage() {
 
 <script>
 const firebaseConfig = {
-  // paste your config here
+  // Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDI3_YMcac5FMvr6h2fExFCOQ6AlAmpxFg",
+  authDomain: "loveislove-666.firebaseapp.com",
+  projectId: "loveislove-666",
+  storageBucket: "loveislove-666.firebasestorage.app",
+  messagingSenderId: "478205315739",
+  appId: "1:478205315739:web:54f3bfbac402787539943e",
+  measurementId: "G-GY6J4H5F4J"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 };
 
 firebase.initializeApp(firebaseConfig);
